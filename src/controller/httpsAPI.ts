@@ -120,19 +120,25 @@ export class HttpsAPI {
 
     this.app.get(
       '/address/:address/transactions',
-      async ({ params: { address }, query: { limit, prev, next, chainId = '31', blockNumber = '0' } }: Request,
-        res: Response, nextFunction: NextFunction) => {
+      async ({
+        params: { address }, query: {
+          limit, prev, next, chainId = '31',
+          blockNumber = '0', startTimestamp = '0', endTimestamp
+        }
+      }: Request,
+      res: Response, nextFunction: NextFunction) => {
         try {
           chainIdSchema.validateSync({ chainId })
           addressSchema.validateSync({ address })
-
           const transactions = await this.addressService.getTransactionsByAddress({
             address: address as string,
             chainId: chainId as string,
             limit: limit as string,
             prev: prev as string,
             next: next as string,
-            blockNumber: blockNumber as string
+            blockNumber: blockNumber as string,
+            startTimestamp: Number(startTimestamp),
+            endTimestamp: Number(endTimestamp)
           }).catch(nextFunction)
           return this.responseJsonOk(res)(transactions)
         } catch (e) {
@@ -175,7 +181,7 @@ export class HttpsAPI {
       '/address/:address',
       async (req, res) => {
         try {
-          const { limit, prev, next, chainId = '31', blockNumber = '0' } = req.query
+          const { limit, prev, next, chainId = '31', blockNumber = '0', startTimestamp = '0', endTimestamp } = req.query
           const { address } = req.params
           chainIdSchema.validateSync({ chainId })
           addressSchema.validateSync({ address })
@@ -185,7 +191,9 @@ export class HttpsAPI {
             blockNumber: blockNumber as string,
             limit: limit as string,
             prev: prev as string,
-            next: next as string
+            next: next as string,
+            startTimestamp: Number(startTimestamp),
+            endTimestamp: Number(endTimestamp)
           })
           return this.responseJsonOk(res)(data)
         } catch (error) {
