@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - develop 
-      - DEVOPS-2000/cicd-dao
 
 env:
   AWS_REGION: us-east-1                
