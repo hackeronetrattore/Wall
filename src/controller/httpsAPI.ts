@@ -66,9 +66,9 @@ export class HttpsAPI {
       'https://rif-wallet-services.testnet.rifcomputing.net',
       'https://dao-backend.testnet.rifcomputing.net',
       'https://frontend.testnet.dao.rif.technology',
-      'https://app.rootstockcollective.xyz/',
-      'https://testnet.app.rootstockcollective.xyz/',
-      'https://dev.app.rootstockcollective.xyz/',
+      'https://app.rootstockcollective.xyz',
+      'https://testnet.app.rootstockcollective.xyz',
+      'https://dev.app.rootstockcollective.xyz'
     ]
     this.app.use(cors({
       origin: (origin, callback) => {
