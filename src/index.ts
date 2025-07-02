@@ -42,7 +42,7 @@ async function main () {
         API_URL: process.env.API_URL as string,
         CHAIN_ID: parseInt(process.env.CHAIN_ID as string) || 31,
         BLOCKBOOK_URL: process.env.BLOCKBOOK_URL,
-        NODE_URL: process.env.NODE_URL,
+        NODE_URL: `${process.env.NODE_URL}${process.env.NODE_KEY}`,
         CYPHER_ESTIMATE_FEE_URL: process.env.CYPHER_ESTIMATE_FEE_URL
       },
       {
@@ -50,7 +50,7 @@ async function main () {
         API_URL: (process.env.API_MAINNET_URL as string),
         CHAIN_ID: parseInt(process.env.CHAIN_MAINNET_ID as string) || 30,
         BLOCKBOOK_URL: process.env.BLOCKBOOK_MAINNET_URL,
-        NODE_URL: process.env.NODE_MAINNET_URL,
+        NODE_URL: `${process.env.NODE_MAINNET_URL}${process.env.NODE_MAINNET_KEY}`,
         CYPHER_ESTIMATE_FEE_URL: process.env.CYPHER_ESTIMATE_FEE_MAINNET_URL
       }
     ],
